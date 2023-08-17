@@ -1,0 +1,15 @@
+# Archivos y carpetas generadas por Node.js
+node_modules/
+package-lock.json
+
+# Archivos de configuración
+.env
+
+# Archivos de registro y depuración
+logs/
+*.log
+
+# Archivos y carpetas generados por IDEs y editores
+.vscode/
+.idea/
+*.iml
