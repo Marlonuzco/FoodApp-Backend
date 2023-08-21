@@ -1,6 +1,8 @@
 const { Router } = require("express");
+const { authenticateToken } = require("../middlewares/authenticateToken");
 const { checkConnection } = require("../controllers/CheckConnection/index");
 const { createNewUser, login } = require("../controllers/Login/index");
+const { getCategories } = require("../controllers/Categories/index");
 
 const router = Router();
 
@@ -13,5 +15,8 @@ router.get("/checkconnection", checkConnection);
 router.post("/login/createnewuser", createNewUser);
 
 router.post("/login/user", login);
+
+//petición get para ir a todas las categorias
+router.get("/categories", authenticateToken, getCategories);
 
 module.exports = router;
