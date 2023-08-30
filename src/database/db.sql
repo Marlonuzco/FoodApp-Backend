@@ -31,3 +31,7 @@ CREATE TABLE products (
     category_id INT REFERENCES categories(id)
 );
 
+CREATE TABLE populars (
+	id SERIAL PRIMARY KEY,
+	product_id INT REFERENCES products(id)
+);
