@@ -1,2 +1,2 @@
 # FoodApp-Backend
-Api for Food App android , fast food for android app
+Api rest for a Web and mobile application for fast food sales
