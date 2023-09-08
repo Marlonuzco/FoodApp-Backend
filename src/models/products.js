@@ -69,6 +69,6 @@ const Popular = sequelize.define(
   { timestamps: false }
 );
 
-Popular.belongsTo(Products, { foreignKey: "product_id" });
+Popular.belongsTo(Products, { foreignKey: "product_id", as: "product" });
 
 module.exports = { Products, Popular };
