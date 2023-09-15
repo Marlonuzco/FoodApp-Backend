@@ -1,21 +1,20 @@
-const { Products, Popular } = require("../../models/products");
+const { Products } = require("../../models/products");
 
-const popularProducts = async (req, res) => {
+const productsCategories = async (req, res) => {
+  console.log('category_id', req.body)
   try {
-    const popularsProducts = await Popular.findAll({
-      include: [
-        {
-          model: Products,
-        },
-      ],
+    const { category_id } = await req.body;
+    const products = await Products.findAll({
+      where: {
+        category_id: category_id,
+      },
     });
-    res
-      .status(200)
-      .json({ message: "Popular products found succefully", popularsProducts });
+    console.log("request", category_id);
+    res.status(200).json({ message: "Products found succefully", products });
   } catch (error) {
-    console.log("Error en popularProducts", error);
     res.status(500).json({ message: "Internal server error" });
+    console.log("Error en productsCategories", error);
   }
 };
 
-module.exports = { popularProducts };
+module.exports = { productsCategories };

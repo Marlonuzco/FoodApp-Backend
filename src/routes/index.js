@@ -3,6 +3,7 @@ const { authenticateToken } = require("../middlewares/authenticateToken");
 const { checkConnection } = require("../controllers/CheckConnection/index");
 const { createNewUser, login } = require("../controllers/Login/index");
 const { getCategoriesAndPopulars } = require("../controllers/Categories/index");
+const { productsCategories } = require("../controllers/Products/index");
 
 const router = Router();
 
@@ -18,5 +19,8 @@ router.post("/login/user", login);
 
 //petición get para ir a todas las categorias y a los productos populares
 router.get("/categories-populars", authenticateToken, getCategoriesAndPopulars);
+
+//petición post para buscar los productos por categoria
+router.post("/categories-products", authenticateToken, productsCategories);
 
 module.exports = router;
