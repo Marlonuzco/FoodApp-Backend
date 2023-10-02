@@ -3,7 +3,12 @@ const { authenticateToken } = require("../middlewares/authenticateToken");
 const { checkConnection } = require("../controllers/CheckConnection/index");
 const { createNewUser, login } = require("../controllers/Login/index");
 const { getCategoriesAndPopulars } = require("../controllers/Categories/index");
-const { productsCategories } = require("../controllers/Products/index");
+const {
+  productsCategories,
+  getUserFavorites,
+  addProductToFavoritesUser,
+  deleteProductFromFavoritesUser,
+} = require("../controllers/Products/index");
 
 const router = Router();
 
@@ -20,7 +25,24 @@ router.post("/login/user", login);
 //petición get para ir a todas las categorias y a los productos populares
 router.get("/categories-populars", authenticateToken, getCategoriesAndPopulars);
 
-//petición post para buscar los productos por categoria
-router.post("/categories-products", authenticateToken, productsCategories);
+//petición get para buscar los productos por categoria
+router.get("/categories-products", authenticateToken, productsCategories);
+
+//petición get para buscar los productos favoritos de un usuario
+router.get("/user-favorites", authenticateToken, getUserFavorites);
+
+//petición post para que un usuario agregue un producto a favorito
+router.post(
+  "/products/user-favorites/add",
+  authenticateToken,
+  addProductToFavoritesUser
+);
+
+//petición delete para que un usuario elimine un producto de favoritos
+router.delete(
+  "/products/user-favorites/delete",
+  authenticateToken,
+  deleteProductFromFavoritesUser
+);
 
 module.exports = router;

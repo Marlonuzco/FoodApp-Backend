@@ -35,3 +35,11 @@ CREATE TABLE populars (
 	id SERIAL PRIMARY KEY,
 	product_id INT REFERENCES products(id)
 );
+
+CREATE TABLE favorites (
+  user_id INT,
+  product_id INT,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (product_id) REFERENCES products(id),
+  PRIMARY KEY (user_id, product_id)
+);

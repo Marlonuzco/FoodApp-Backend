@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../sequelized");
 const { Categories } = require("./categories");
+const { User } = require("./users");
 
 const Products = sequelize.define(
   "products",
@@ -18,11 +19,11 @@ const Products = sequelize.define(
       type: DataTypes.STRING,
     },
     price: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.REAL,
       allowNull: false,
     },
     total_price: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.REAL,
       allowNull: false,
     },
     photo: {
@@ -71,4 +72,31 @@ const Popular = sequelize.define(
 
 Popular.belongsTo(Products, { foreignKey: "product_id", as: "product" });
 
-module.exports = { Products, Popular };
+const UserFavorites = sequelize.define(
+  "favorites",
+  {
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: User,
+        key: "id",
+      },
+    },
+    product_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: Products,
+        key: "id",
+      },
+    },
+  },
+  { timestamps: false }
+);
+
+UserFavorites.belongsTo(Products, { foreignKey: "product_id", as: "product" });
+
+module.exports = { Products, Popular, UserFavorites };
