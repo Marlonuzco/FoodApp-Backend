@@ -8,8 +8,10 @@ const productsCategories = async (req, res) => {
         category_id: category_id,
       },
     });
-    if (products[0]?.name) {
+    if (products.length > 0) {
       res.status(200).json({ message: "Products found succefully", products });
+    } else {
+      res.status(404).json({ message: "Products not found" });
     }
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
@@ -27,11 +29,15 @@ const getUserFavorites = async (req, res) => {
       include: [{ model: Products, as: "product" }],
     });
     const products = items.map((product) => product.product);
-    if (products) {
+    if (products.length > 0) {
       res.status(200).json({
         message: "Favorites of the user found succefully",
         products,
       });
+    } else {
+      res
+        .status(404)
+        .json({ message: "Error favorites products of the user not found" });
     }
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
