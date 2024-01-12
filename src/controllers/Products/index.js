@@ -29,16 +29,16 @@ const getUserFavorites = async (req, res) => {
       include: [{ model: Products, as: "product" }],
     });
     const products = items.map((product) => product.product);
-    if (products.length > 0) {
+    if (products) {
       res.status(200).json({
         message: "Favorites of the user found succefully",
         products,
       });
-    } else {
+    } /*  else {
       res
         .status(404)
-        .json({ message: "Error favorites products of the user not found" });
-    }
+        .json({ message: "Error, favorites products of the user not found" });
+    } */
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
     console.log("Error en getUserFavorites", error);
