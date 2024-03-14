@@ -13,7 +13,7 @@ const {
 const router = Router();
 
 //petición get para probar la conexión
-router.get("/checkconnection", checkConnection);
+router.get("/check-connection", checkConnection);
 
 //Login Routes
 
@@ -21,6 +21,8 @@ router.get("/checkconnection", checkConnection);
 router.post("/login/createnewuser", createNewUser);
 //petición post para login de usuarios
 router.post("/login/user", login);
+
+//Rutas de productos y categorias
 
 //petición get para ir a todas las categorias y a los productos populares
 router.get("/categories-populars", authenticateToken, getCategoriesAndPopulars);
